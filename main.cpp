@@ -65,12 +65,13 @@ public:
         return true;
     }
 
-    Product *findProductByBarcode(const std::string &barcode)
-    {
-        auto it = std::find_if(products.begin(), products.end(),
-                               [&](const Product &p)
-                               { return p.barcode == barcode; });
-        return it != products.end() ? &*it : nullptr;
+    Product* findProductByBarcode(const std::string& barcode) {
+        for (auto& product : products) {
+            if (product.barcode == barcode) {
+                return &product;
+            }
+        }
+        return nullptr;
     }
 
     std::vector<Product *> findProductsByName(const std::string &name)
@@ -88,14 +89,11 @@ public:
     }
 
 private:
-    std::string toLower(const std::string &str)
-    {
+    std::string toLower(const std::string& str) {
         std::string lowerStr = str;
-        std::transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(),
-                       [](unsigned char c)
-                       { return std::tolower(c); });
+        std::transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(), ::tolower);
         return lowerStr;
-    }
+}
 };
 
 struct ReceiptItem
