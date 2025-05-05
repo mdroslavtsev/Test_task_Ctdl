@@ -35,8 +35,8 @@ public:
             std::istringstream ss(line);
             std::string name, barcode, priceStr;
 
-            if (std::getline(ss, name, ',') &&
-                std::getline(ss, barcode, ',') &&
+            if (std::getline(ss, name, ';') &&
+                std::getline(ss, barcode, ';') &&
                 std::getline(ss, priceStr))
             {
 
